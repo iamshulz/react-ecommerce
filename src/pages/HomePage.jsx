@@ -1,14 +1,19 @@
 
 import { Header } from '../components/Header'
-import { products } from '../../starting-code/data/products';
+import { useEffect, useState } from 'react';
 import axios from 'axios'
 import './HomePage.css';
 
 export function HomePage() {
-    axios.get('http://localhost:3000/api/products')
-        .then((response) => {
-            return response.data
-        })
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => { // useEffect will help us run api call only once when homepage rerenders
+        axios.get('http://localhost:3000/api/products')
+            .then((response) => {
+                setProducts(response.data)
+            })
+    }, []) //[] - dependency array, will only run once when the page rerenders
+
 
     return (
         <>
