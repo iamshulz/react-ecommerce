@@ -10,12 +10,11 @@ export function HomePage({ cart }) {
 
 
     useEffect(() => { // useEffect will help us run api call only once when homepage rerenders
-        axios.get('/api/products')
-            .then((response) => {
-                setProducts(response.data)
-            })
-
-
+        const getHomeData = async () => {
+            const response = await axios.get('/api/products')
+            setProducts(response.data)
+        }
+        getHomeData();
     }, []) //[] - dependency array, will only run once when the page rerenders
 
 
