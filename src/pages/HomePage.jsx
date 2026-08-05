@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import './HomePage.css';
 
-export function HomePage() {
+export function HomePage({ cart }) {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([])
+
 
     useEffect(() => { // useEffect will help us run api call only once when homepage rerenders
         axios.get('/api/products')
@@ -14,10 +14,7 @@ export function HomePage() {
                 setProducts(response.data)
             })
 
-        axios.get('/api/cart-items')
-            .then((response) => {
-                setCart(response.data)
-            })
+
     }, []) //[] - dependency array, will only run once when the page rerenders
 
 
